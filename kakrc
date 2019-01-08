@@ -1,5 +1,10 @@
 colorscheme gruvbox
 
+# Some UI niceties
+add-highlighter global/ show-matching
+add-highlighter global/ number-lines -hlcursor -separator ' '
+add-highlighter global/ wrap -word -indent
+
 # No clippy
 set -add global ui_options ncurses_assistant=none
 

@@ -46,6 +46,7 @@ hook global WinSetOption filetype=rust %{
     set window lintcmd %{
         cargo clippy 2>&1 | gawk 'match($0, /   --> (.*)/, arr) { print arr[1] " " prev } { prev=$0 }'
     }
+    set window makecmd 'cargo'
 }
 hook global WinSetOption filetype=sh %{
     set window lintcmd 'shellcheck -f gcc'

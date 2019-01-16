@@ -23,10 +23,10 @@ map global normal '<a-#>' ': comment-block<ret>' -docstring 'comment block'
 map global normal '='     ': format<ret>'        -docstring 'format buffer'
 
 # Opening splits
-alias global vsp i3-new-right
-alias global hsp i3-new-down
-alias global vspt i3-new-term-right
-alias global hspt i3-new-term-down
+alias global vsp i3-split-horizontal
+alias global hsp i3-split-vertical
+define-command vspt 'i3-terminal-horizontal zsh'
+define-command hspt 'i3-terminal-vertical zsh'
 
 # TODO: Figure out how to select whole text object
 map global normal '<c-l>' 'b]w: ctags-search<ret>'

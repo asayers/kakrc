@@ -1,39 +1,34 @@
-# http://i3wm.org
-# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-# depends on: x11.kak
-# see also: tmux.kak
-
-## Temporarily override the default client creation command
-define-command -hidden -params 2 i3-new-impl %{
-  evaluate-commands %sh{
-    echo "echo $2"
-    if [ -z "$kak_opt_termcmd" ]; then
-      echo "echo -markup '{Error}termcmd option is not set'"
-      exit
-    fi
-    {
-      # https://github.com/i3/i3/issues/1767
-      i3-msg "split $1"
-      # clone (same buffer, same line)
-      exec $kak_opt_termcmd "$2"
-    } < /dev/null > /dev/null 2>&1 &
-  }
+define-command i3-split-vertical -docstring "Create a new kak client below" %{
+    # clone (same buffer, same line)
+    i3-terminal-vertical "kak -c %val{session} -e 'execute-keys :buffer <space> %val{buffile} <ret> %val{cursor_line} g'"
 }
 
-define-command i3-new-down -docstring "Create a new kak client below" %{
-    i3-new-impl v "kak -c %val{session} -e 'execute-keys :buffer <space> %val{buffile} <ret> %val{cursor_line} g'"
+define-command i3-split-horizontal -docstring "Create a new kak client on the right" %{
+    # clone (same buffer, same line)
+    i3-terminal-horizontal "kak -c %val{session} -e 'execute-keys :buffer <space> %val{buffile} <ret> %val{cursor_line} g'"
+    echo "kak -c %val{session} -e 'execute-keys :buffer <space> %val{buffile} <ret> %val{cursor_line} g'"
 }
 
-define-command i3-new-right -docstring "Create a new kak client on the right" %{
-    i3-new-impl h "kak -c %val{session} -e 'execute-keys :buffer <space> %val{buffile} <ret> %val{cursor_line} g'"
+define-command i3-terminal-vertical -params 1.. -shell-completion -docstring "i3-terminal-vertical <program> [arguments]: Create a new terminal below" %{
+    evaluate-commands %sh{echo "i3-new-impl v %{$@}"}
 }
 
-define-command i3-new-term-down -docstring "Create a new terminal below" %{
-    i3-new-impl v "zsh"
+define-command i3-terminal-horizontal -params 1.. -shell-completion -docstring "i3-terminal-vertical <program> [arguments]: Create a new terminal on the right" %{
+    evaluate-commands %sh{echo "i3-new-impl h %{$@}"}
 }
 
-define-command i3-new-term-right -docstring "Create a new terminal on the right" %{
-    i3-new-impl h "zsh"
+define-command -hidden -params 2.. i3-new-impl %{
+    evaluate-commands %sh{
+        if [ -z "$kak_opt_termcmd" ]; then
+            echo "echo -markup '{Error}termcmd option is not set'"
+            exit
+        fi
+        i3-msg "split $1" >&2
+        shift
+        # We have to disconnect stdout and stderr, or kakoune will wait
+        # for the command to finish
+        $kak_opt_termcmd "$@" >/dev/null 2>/dev/null &
+    }
 }
 
 

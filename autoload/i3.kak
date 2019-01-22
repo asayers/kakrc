@@ -1,3 +1,5 @@
+# Based on https://github.com/Delapouite/kakoune-i3/blob/master/i3.kak
+
 define-command i3-split-vertical -docstring "Create a new kak client below" %{
     # clone (same buffer, same line)
     i3-terminal-vertical "kak -c %val{session} -e 'execute-keys :buffer <space> %val{buffile} <ret> %val{cursor_line} g'"

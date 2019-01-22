@@ -43,9 +43,7 @@ alias global hsp i3-split-vertical
 define-command vspt 'i3-terminal-horizontal zsh'
 define-command hspt 'i3-terminal-vertical zsh'
 
-# TODO: Figure out how to select whole text object
-map global normal '<c-l>' 'b]w: ctags-search<ret>'
-map global goto 'p' ': ctags-search<ret>' -docstring 'jump to tag'
+map global goto ']' '<esc><a-a>w: ctags-search<ret>' -docstring 'jump to tag'
 
 # Key mappings to enter user modes
 # map global normal '<c-w>' ': enter-user-mode i3<ret>'

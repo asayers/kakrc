@@ -26,6 +26,17 @@ map global normal '#'     ': comment-line<ret>'  -docstring 'comment line'
 map global normal '<a-#>' ': comment-block<ret>' -docstring 'comment block'
 map global normal '='     ': format<ret>'        -docstring 'format buffer'
 
+# Formatting comments
+declare-option -docstring 'Prefix indicating that a line is part of a docstring' str docstring_line
+define-command select-comment %{ execute-keys %sh{
+    # This doesn't quite work right - it will select all comment blocks in the current paragraph, not just the one the cursor is in.
+    printf '<a-a>p<a-s><a-k>^\\h*%s<ret><a-_>\n' "$kak_opt_docstring_line"
+    # <a-a>c^($|\s*[^\s/]),^($|\s*[^\s/])<ret>H<a-;>L<a-;>
+}}
+map global object '/' '<esc>: select-comment<ret>'
+map global normal '<a-=>' '|fmt -p${kak_opt_docstring_line} -u -w${kak_opt_autowrap_column}<ret>'
+map global user 'f' '<a-a>/<a-=>'
+
 # Opening splits
 alias global vsp i3-split-horizontal
 alias global hsp i3-split-vertical
@@ -51,6 +62,7 @@ hook global WinSetOption filetype=rust %{
         cargo clippy 2>&1 | gawk 'match($0, /   --> (.*)/, arr) { print arr[1] " " prev } { prev=$0 }'
     }
     set window makecmd 'cargo'
+    set window docstring_line '///'
 }
 hook global WinSetOption filetype=sh %{
     set window lintcmd 'shellcheck -f gcc'

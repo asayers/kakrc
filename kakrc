@@ -13,6 +13,10 @@ set global grepcmd 'rg --column'
 
 set global tabstop 4
 
+hook global BufCreate '\*make\*' %{
+    hook buffer BufReadFifo '.*' 'ansi-render'
+}
+
 # Soft tabs
 # map global insert <tab> '<a-;><gt>'
 # map global insert <s-tab> '<a-;><lt>'

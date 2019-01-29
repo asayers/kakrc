@@ -70,8 +70,9 @@ hook global WinSetOption filetype=rust %{
         cargo clippy 2>&1 | gawk 'match($0, /   --> (.*)/, arr) { print arr[1] " " prev } { prev=$0 }'
     }
     set window makecmd 'cargo'
-    map window user 'c' ': make check --all --color always<ret>'
-    map window user 't' ': make test --all --color always<ret>'
+    map window user 'c' ': make check --all --color always<ret>' -docstring 'cargo check'
+    map window user 't' ': make test --all --color always<ret>' -docstring 'cargo test'
+    map window user 'd' ': make doc --all --color always<ret>' -docstring 'cargo doc'
     set window docstring_line '///'
 }
 hook global WinSetOption filetype=sh %{

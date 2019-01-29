@@ -17,6 +17,11 @@ hook global BufCreate '\*make\*' %{
     hook buffer BufReadFifo '.*' 'ansi-render'
 }
 
+# Edit or dir
+unalias global e edit
+alias global e edit-or-dir
+map global normal '<backspace>' ': edit-or-dir %sh{dirname <c-r>%}<ret>'
+
 # Soft tabs
 # map global insert <tab> '<a-;><gt>'
 # map global insert <s-tab> '<a-;><lt>'

@@ -13,8 +13,10 @@ set global grepcmd 'rg --column'
 
 set global tabstop 4
 
+set global toolsclient "tools"
 hook global BufCreate '\*make\*' %{
     hook buffer BufReadFifo '.*' 'ansi-render'
+    hook buffer BufCloseFifo '.*' 'ansi-render'
 }
 
 # Edit or dir

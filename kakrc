@@ -49,6 +49,8 @@ define-command vspt 'i3-terminal-horizontal zsh'
 define-command hspt 'i3-terminal-vertical zsh'
 
 map global goto ']' '<esc><a-a>w: ctags-search<ret>' -docstring 'jump to tag'
+map global goto '>' '<esc>: grep-next-match<ret>'
+map global goto '<' '<esc>: grep-previous-match<ret>'
 
 # Key mappings to enter user modes
 # map global normal '<c-w>' ': enter-user-mode i3<ret>'

@@ -105,3 +105,7 @@ hook global WinSetOption filetype=sh %{
 # }
 
 # define-command fzf %{ replace-pane "sh -c kak" }
+
+map global user y -docstring 'yank to clipboard' '<a-|>xsel -ib<ret>'
+map global user p -docstring 'paste from clipboard' '<a-!>xsel --output --clipboard<ret>'
+map global user P -docstring 'paste from clipboard' '!xsel --output --clipboard<ret>'

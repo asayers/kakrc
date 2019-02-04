@@ -50,9 +50,15 @@ alias global hsp i3-split-vertical
 define-command vspt 'i3-terminal-horizontal zsh'
 define-command hspt 'i3-terminal-vertical zsh'
 
+# New goto targets
 map global goto ']' '<esc><a-a>w: ctags-search<ret>' -docstring 'jump to tag'
-map global goto '>' '<esc>: grep-next-match<ret>'
-map global goto '<' '<esc>: grep-previous-match<ret>'
+map global goto '<left>' '<esc>: buffer-previous<ret>' -docstring 'prev buffer'
+map global goto '<right>' '<esc>: buffer-next<ret>' -docstring 'next buffer'
+map global goto '<' '<esc>: grep-previous-match<ret>' -docstring 'prev grep match'
+map global goto '>' '<esc>: grep-next-match<ret>' -docstring 'next grep match'
+map global goto '{' '<esc>: lint-previous-error<ret>' -docstring 'prev lint error'
+map global goto '}' '<esc>: lint-next-error<ret>' -docstring 'next lint error'
+map global goto -docstring 'edit kakrc' r '<esc>: e ~/.config/kak/kakrc<ret>'
 
 # Key mappings to enter user modes
 # map global normal '<c-w>' ': enter-user-mode i3<ret>'

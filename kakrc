@@ -60,6 +60,10 @@ map global goto '{' '<esc>: lint-previous-error<ret>' -docstring 'prev lint erro
 map global goto '}' '<esc>: lint-next-error<ret>' -docstring 'next lint error'
 map global goto -docstring 'edit kakrc' r '<esc>: e ~/.config/kak/kakrc<ret>'
 
+# Case insensitive search by default
+map global normal / '/(?i)'
+map global normal ? '?(?i)'
+
 # Key mappings to enter user modes
 # map global normal '<c-w>' ': enter-user-mode i3<ret>'
 map global normal "'"     ': enter-user-mode git<ret>'

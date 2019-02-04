@@ -24,8 +24,9 @@ alias global e edit-or-dir
 map global normal '<backspace>' ': edit-or-dir %sh{dirname <c-r>%}<ret>'
 
 # Soft tabs
-# map global insert <tab> '<a-;><gt>'
-# map global insert <s-tab> '<a-;><lt>'
+hook global InsertChar \t %{ try %{
+  execute-keys -draft "h<a-h><a-k>\A\h+\z<ret><a-;>;%opt{indentwidth}@"
+}}
 
 # set global ctagscmd %{sh -c 'fd | xargs ctags'}
 map global normal '#'     ': comment-line<ret>'  -docstring 'comment line'

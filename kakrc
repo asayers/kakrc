@@ -37,7 +37,7 @@ map global normal '='     ': format<ret>'        -docstring 'format buffer'
 declare-option -docstring 'Prefix indicating that a line is part of a docstring' str docstring_line
 define-command select-comment %{ execute-keys %sh{
     # This doesn't quite work right - it will select all comment blocks in the current paragraph, not just the one the cursor is in.
-    printf '<a-a>p<a-s><a-k>^\\h*%s<ret><a-_>\n' "$kak_opt_docstring_line"
+    printf '<a-a>p<a-s><a-k>^\\h*%s<ret><a-_>\n' "$kak_opt_comment_line"
     # <a-a>c^($|\s*[^\s/]),^($|\s*[^\s/])<ret>H<a-;>L<a-;>
 }}
 map global object '#' '<esc>: select-comment<ret>'

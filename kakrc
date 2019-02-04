@@ -40,7 +40,7 @@ define-command select-comment %{ execute-keys %sh{
     printf '<a-a>p<a-s><a-k>^\\h*%s<ret><a-_>\n' "$kak_opt_docstring_line"
     # <a-a>c^($|\s*[^\s/]),^($|\s*[^\s/])<ret>H<a-;>L<a-;>
 }}
-map global object '/' '<esc>: select-comment<ret>'
+map global object '#' '<esc>: select-comment<ret>'
 map global normal '<a-=>' '|fmt -p${kak_opt_docstring_line} -u -w${kak_opt_autowrap_column}<ret>'
 map global user 'f' '<a-a>/<a-=>'
 

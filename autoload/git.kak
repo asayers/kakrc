@@ -8,6 +8,7 @@ map global git 'c' -docstring 'View staged changes' ':git-commit-mode<ret>'
 define-command git-commit-mode %{
     git diff --cached
     map window git 'c' -docstring 'Commit staged changes' ':git commit<ret>'
+    map window git 'a' -docstring 'Amend HEAD' ':git commit --amend<ret>'
 }
 
 define-command git-stage-as -hidden -params 2 -docstring 'git-stage-as <file> <relpath>: Stage the contents of <file> at <relpath>' %{

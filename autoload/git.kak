@@ -1,9 +1,9 @@
 declare-user-mode git
 
-map global git 's' ':git status<ret>' -docstring 'git status'
-map global git 'l' ':git log<ret>' -docstring 'git log'
-map global git 'd' ':git-staged<ret>' -docstring 'git staged'
-map global git 'c' -docstring 'View staged changes' ':git-commit-mode<ret>'
+map global git 's' ': git status<ret>' -docstring 'git status'
+map global git 'l' ': git log<ret>' -docstring 'git log'
+map global git 'd' ': git-staged<ret>' -docstring 'git staged'
+map global git 'c' -docstring 'View staged changes' ': git-commit-mode<ret>'
 
 define-command git-commit-mode %{
     git diff --cached

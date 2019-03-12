@@ -66,7 +66,7 @@ map global normal ? '?(?i)'
 
 # Key mappings to enter user modes
 # map global normal '<c-w>' ': enter-user-mode i3<ret>'
-map global normal "'"     ': enter-user-mode git<ret>'
+map global user "g" ': enter-user-mode git<ret>'
 map global normal "<c-p>" ': enter-user-mode fzy<ret>'
 
 # Show git changes in gutter

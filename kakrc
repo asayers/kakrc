@@ -8,7 +8,7 @@ add-highlighter global/ number-lines -hlcursor
 set -add global ui_options ncurses_assistant=none
 
 # Use ripgrep
-set global grepcmd 'rg --column'
+set global grepcmd 'rg --column --ignore'
 
 set global tabstop 4
 

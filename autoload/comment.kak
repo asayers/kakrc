@@ -15,5 +15,9 @@ map global user 'f' '<a-a>/<a-=>'
 
 define-command recomment %{ execute-keys %sh{
     comment="$(echo $kak_selection | sed -n '1s/^\s*\([#/*()-]*\).*/\1/p')"
-    printf '|fmt -p%s -w%s -u<ret>\n' ${comment} ${kak_opt_autowrap_column}
+    if [ -z $comment ]; then
+        printf '|fmt -w%s -u<ret>\n' "${kak_opt_autowrap_column}"
+    else
+        printf '|fmt -p%s -w%s -u<ret>\n' "${comment}" "${kak_opt_autowrap_column}"
+    fi
 }}

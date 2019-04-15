@@ -67,9 +67,9 @@ hook global WinSetOption filetype=rust %{
     set window lintcmd %{
         cargo clippy 2>&1 | gawk 'match($0, /   --> (.*)/, arr) { print arr[1] " " prev } { prev=$0 }'
     }
-    set window makecmd 'cargo'
+    set window makecmd 'RUST_BACKTRACE=1 cargo'
     map window user 'c' ': make check --all --color always<ret>' -docstring 'cargo check'
-    map window user 't' ': make test --all --color always<ret>' -docstring 'cargo test'
+    map window user 't' ': make test --all --color always -- --nocapture --test-threads=1<ret>' -docstring 'cargo test'
     map window user 'd' ': make doc --all --color always<ret>' -docstring 'cargo doc'
     set window docstring_line '///'
 }

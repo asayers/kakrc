@@ -1,4 +1,3 @@
-# Some UI niceties
 colorscheme gruvbox
 add-highlighter global/ show-matching
 add-highlighter global/ number-lines -hlcursor
@@ -13,6 +12,8 @@ set -add global ui_options ncurses_assistant=none
 set global grepcmd 'rg --column --ignore'
 
 set global toolsclient "tools"
+
+# Colour make output
 hook global BufCreate '\*make\*' %{
     hook buffer BufReadFifo '.*' 'ansi-render'
     hook buffer BufCloseFifo '.*' 'ansi-render'
@@ -58,6 +59,7 @@ map global normal "<c-p>" ': enter-user-mode fzy<ret>'
 hook global WinCreate    .* 'git show-diff'
 hook global BufWritePost .* %{ git update-diff }
 
+# Rust settings
 hook global WinSetOption filetype=rust %{
     set window formatcmd 'rustfmt'
     set window lintcmd %{
@@ -69,6 +71,8 @@ hook global WinSetOption filetype=rust %{
     map window user 'd' ': make doc --all --color always<ret>' -docstring 'cargo doc'
     set window docstring_line '///'
 }
+
+# Shell settings
 hook global WinSetOption filetype=sh %{
     set window lintcmd 'shellcheck -f gcc'
 }

@@ -13,8 +13,6 @@ set -add global ui_options ncurses_assistant=none
 # Use ripgrep
 set global grepcmd 'rg --column --ignore'
 
-set global tabstop 4
-
 set global toolsclient "tools"
 hook global BufCreate '\*make\*' %{
     hook buffer BufReadFifo '.*' 'ansi-render'

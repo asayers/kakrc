@@ -4,6 +4,9 @@ add-highlighter global/ show-matching
 add-highlighter global/ number-lines -hlcursor
 # add-highlighter global/ wrap -word -indent
 
+# Highlight trailing whitespace
+add-highlighter global/ regex '[ \t]+$' 0:red,red
+
 # No clippy
 set -add global ui_options ncurses_assistant=none
 

@@ -1,5 +1,6 @@
 declare-user-mode git
 
+map global git 'a' ': git add<ret>' -docstring 'git add'
 map global git 's' ': git status<ret>' -docstring 'git status'
 map global git 'l' ': git log<ret>' -docstring 'git log'
 map global git 'i' ': git-staged<ret>' -docstring 'git staged'

@@ -56,10 +56,7 @@ map global normal "<c-p>" ': enter-user-mode fzy<ret>'
 
 # Show git changes in gutter
 hook global WinCreate    .* 'git show-diff'
-hook global BufWritePost .* %{
-    git update-diff
-    ctags-update-tags
-}
+hook global BufWritePost .* %{ git update-diff }
 
 hook global WinSetOption filetype=rust %{
     set window formatcmd 'rustfmt'

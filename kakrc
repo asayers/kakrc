@@ -2,7 +2,6 @@
 colorscheme gruvbox
 add-highlighter global/ show-matching
 add-highlighter global/ number-lines -hlcursor
-# add-highlighter global/ wrap -word -indent
 
 # Highlight trailing whitespace
 add-highlighter global/ regex '[ \t]+$' 0:red,red
@@ -35,8 +34,6 @@ map global normal 'D' 'Gl'
 # Opening splits
 alias global vsp i3-split-horizontal
 alias global hsp i3-split-vertical
-define-command vspt 'i3-terminal-horizontal zsh'
-define-command hspt 'i3-terminal-vertical zsh'
 
 # New goto targets
 map global goto ']' '<esc><a-a>w: ctags-search<ret>' -docstring 'jump to tag'
@@ -97,8 +94,3 @@ hook global WinSetOption filetype=sh %{
 map global user y -docstring 'yank to clipboard' '<a-|>xsel -ib<ret>'
 map global user p -docstring 'paste from clipboard' '<a-!>xsel --output --clipboard<ret>'
 map global user P -docstring 'paste from clipboard' '!xsel --output --clipboard<ret>'
-
-map global normal l <end>
-map global normal L Gl
-map global normal h <home>
-map global normal H Gh

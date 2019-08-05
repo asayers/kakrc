@@ -30,7 +30,7 @@ hook global InsertChar \t %{ try %{
 }}
 
 # set global ctagscmd %{sh -c 'fd | xargs ctags'}
-map global normal 'D' 'Gl'
+map global normal 'D' 'Gl<a-;>'
 
 # Opening splits
 alias global vsp i3-split-horizontal

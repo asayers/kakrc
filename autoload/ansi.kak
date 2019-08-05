@@ -1,3 +1,10 @@
+##
+## kak-ansi by eraserhd
+##
+
+# This is copied from version 1.  Version 2 is a rewrite in C, which is
+# surplus to my requirements.
+
 declare-option -hidden range-specs ansi_color_ranges
 
 define-command \

@@ -1,3 +1,7 @@
+##
+## kakoune-edit-or-dir by TeddyDD
+##
+
 define-command edit-or-dir -file-completion -params .. %{
     evaluate-commands %sh{
         echo "try %{ delete-buffer! *dir* }"

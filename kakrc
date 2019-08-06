@@ -45,7 +45,13 @@ map global goto '<' '<esc>: grep-previous-match<ret>' -docstring 'prev grep matc
 map global goto '>' '<esc>: grep-next-match<ret>' -docstring 'next grep match'
 map global goto '{' '<esc>: lint-previous-error<ret>' -docstring 'prev lint error'
 map global goto '}' '<esc>: lint-next-error<ret>' -docstring 'next lint error'
-map global goto -docstring 'edit kakrc' r '<esc>: e ~/.config/kak/kakrc<ret>'
+map global goto -docstring 'edit kakrc' R '<esc>: e ~/.config/kak/kakrc<ret>'
+
+# Show hover info (docs)
+map global normal K ': lsp-hover<ret>'
+
+# Auto-highlight references
+hook global NormalIdle '.*' lsp-highlight-references
 
 # Case insensitive search by default
 map global normal / '/(?i)'

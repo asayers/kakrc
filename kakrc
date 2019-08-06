@@ -19,9 +19,7 @@ hook global BufCreate '\*make\*' %{
     hook buffer BufCloseFifo '.*' 'ansi-render'
 }
 
-# Edit or dir
-unalias global e edit
-alias global e edit-or-dir
+# Browse directory on backspace
 map global normal '<backspace>' ': edit-or-dir %sh{dirname <c-r>%}<ret>'
 
 # Soft tabs

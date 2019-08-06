@@ -81,3 +81,7 @@ hook global WinSetOption filetype=sh %{
 map global user y -docstring 'yank to clipboard' '<a-|>xsel -ib<ret>'
 map global user p -docstring 'paste from clipboard' '<a-!>xsel --output --clipboard<ret>'
 map global user P -docstring 'paste from clipboard' '!xsel --output --clipboard<ret>'
+
+# Enable LSP
+eval %sh{kak-lsp --kakoune -s $kak_session}
+lsp-enable

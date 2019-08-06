@@ -1,16 +1,17 @@
 declare-user-mode git
 
-map global git 'a' ': git add<ret>' -docstring 'git add'
-map global git 's' ': git status<ret>' -docstring 'git status'
-map global git 'l' ': git log<ret>' -docstring 'git log'
-map global git 'i' ': git-staged<ret>' -docstring 'git staged'
-map global git 'c' -docstring 'View staged changes' ': git-commit-mode<ret>'
-map global git 'd' -docstring 'View unstaged changes' ': git diff<ret>'
+map global git 's' ': git status<ret>'      -docstring 'git status'
+map global git 'a' ': git add<ret>'         -docstring 'Add this file to the stage'
+map global git 'i' ': git-staged<ret>'      -docstring 'View this file in the stage'
+map global git 'c' ': git-commit-mode<ret>' -docstring 'View staged changes'
+map global git 'd' ': git diff<ret>'        -docstring 'View unstaged changes'
+map global git 'l' ': git log<ret>'         -docstring 'git log'
 
 define-command git-commit-mode %{
     git diff --cached
-    map window git 'c' -docstring 'Commit staged changes' ':git commit<ret>'
-    map window git 'a' -docstring 'Amend HEAD' ':git commit --amend<ret>'
+    # Just for this window, we override some of the git-mode keybinds
+    map window git 'c' ':git commit<ret>'         -docstring 'Commit staged changes'
+    map window git 'a' ':git commit --amend<ret>' -docstring 'Amend HEAD'
 }
 
 define-command git-stage-as -hidden -params 2 -docstring 'git-stage-as <file> <relpath>: Stage the contents of <file> at <relpath>' %{

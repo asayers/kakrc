@@ -92,3 +92,8 @@ map global user M ': mark-clear<ret>' -docstring 'Clear all marks'
 # Enable LSP
 eval %sh{kak-lsp --kakoune -s $kak_session}
 lsp-enable
+
+# bc integration
+define-command bc -params .. \
+    -docstring 'Pipe to bc – each selection, followed by (optional) arguments given to :bc' \
+    %{ execute-keys "a%arg(@)<esc>|bc<ret>" }

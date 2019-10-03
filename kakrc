@@ -21,6 +21,7 @@ hook global BufCreate '\*make\*' %{
 
 # Browse directory on backspace
 map global normal '<backspace>' ': edit-or-dir %sh{dirname <c-r>%}<ret>'
+map global goto 'G' '<esc>: edit-or-dir %sh{git rev-parse --show-cdup}<ret>'
 
 # Soft tabs
 hook global InsertChar \t %{ try %{

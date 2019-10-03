@@ -1,7 +1,7 @@
 map global normal '#'     ': comment-line<ret>'  -docstring 'comment line'
 map global normal '<a-#>' ': comment-block<ret>' -docstring 'comment block'
 map global normal '='     ': format<ret>'        -docstring 'format buffer'
-map global normal '<a-=>' ': recomment<ret>'     -docstring 'format comment'
+map global normal '+'     ': reflow<ret>'        -docstring 'reflow selection'
 
 # Formatting comments
 declare-option -docstring 'Prefix indicating that a line is part of a docstring' str docstring_line
@@ -13,7 +13,7 @@ define-command select-comment %{ execute-keys %sh{
 map global object '#' '<esc>: select-comment<ret>'
 map global user 'f' '<a-a>/<a-=>'
 
-define-command recomment %{ execute-keys %sh{
+define-command reflow %{ execute-keys %sh{
     comment="$(echo $kak_selection | sed -n '1s/^\s*\([#/*()-]*\).*/\1/p')"
     if [ -z $comment ]; then
         printf '|fmt -w%s -u<ret>\n' "${kak_opt_autowrap_column}"

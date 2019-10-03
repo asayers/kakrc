@@ -51,7 +51,7 @@ map global goto -docstring 'edit kakrc' R '<esc>: e ~/.config/kak/kakrc<ret>'
 map global normal K ': lsp-hover<ret>'
 
 # Auto-highlight references
-hook global NormalIdle '.*' lsp-highlight-references
+# hook global NormalIdle '.*' %{ try %{ lsp-highlight-references }}
 
 # Case insensitive search by default
 map global normal / '/(?i)'

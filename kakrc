@@ -95,3 +95,9 @@ map global user M ': mark-clear<ret>' -docstring 'Clear all marks'
 # lsp-enable
 
 def find -params 1 -shell-script-candidates %{ git ls-files } %{ edit %arg{1} }
+
+declare-user-mode select
+map global normal "'" ': enter-user-mode select<ret>'
+map global select "'" ':find '         -docstring 'select file'
+map global select ';' ':buffer '       -docstring 'select buffer'
+map global select 'l' ':ctags-search ' -docstring 'select tag'

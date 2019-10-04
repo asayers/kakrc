@@ -94,11 +94,6 @@ map global user M ': mark-clear<ret>' -docstring 'Clear all marks'
 # eval %sh{kak-lsp --kakoune -s $kak_session}
 # lsp-enable
 
-# bc integration
-define-command bc -params .. \
-    -docstring 'Pipe to bc – each selection, followed by (optional) arguments given to :bc' \
-    %{ execute-keys "a%arg(@)<esc>|bc<ret>" }
-
 # define-command find -params 1 -shell-script-candidates %{ fd } %{ edit %arg{1} }
 # def find -params 1 -shell-script-candidates %{ find -type f } %{ edit %arg{1} }
 def find -params 1 -shell-script-candidates %{ fdfind } %{ edit %arg{1} }

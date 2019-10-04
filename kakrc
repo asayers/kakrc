@@ -48,7 +48,7 @@ map global goto '}' '<esc>: lint-next-error<ret>' -docstring 'next lint error'
 map global goto -docstring 'edit kakrc' R '<esc>: e ~/.config/kak/kakrc<ret>'
 
 # Show hover info (docs)
-map global normal K ': lsp-hover<ret>'
+# map global normal K ': lsp-hover<ret>'
 
 # Auto-highlight references
 # hook global NormalIdle '.*' %{ try %{ lsp-highlight-references }}
@@ -91,8 +91,8 @@ map global user m ': mark-word<ret>' -docstring 'Mark the word under the cursor'
 map global user M ': mark-clear<ret>' -docstring 'Clear all marks'
 
 # Enable LSP
-eval %sh{kak-lsp --kakoune -s $kak_session}
-lsp-enable
+# eval %sh{kak-lsp --kakoune -s $kak_session}
+# lsp-enable
 
 # bc integration
 define-command bc -params .. \

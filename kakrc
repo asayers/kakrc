@@ -94,6 +94,4 @@ map global user M ': mark-clear<ret>' -docstring 'Clear all marks'
 # eval %sh{kak-lsp --kakoune -s $kak_session}
 # lsp-enable
 
-# define-command find -params 1 -shell-script-candidates %{ fd } %{ edit %arg{1} }
-# def find -params 1 -shell-script-candidates %{ find -type f } %{ edit %arg{1} }
-def find -params 1 -shell-script-candidates %{ fdfind } %{ edit %arg{1} }
+def find -params 1 -shell-script-candidates %{ git ls-files } %{ edit %arg{1} }

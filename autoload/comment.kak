@@ -15,7 +15,7 @@ map global object '#' '<esc>: select-comment<ret>'
 map global user 'f' '<a-a>/<a-=>'
 
 define-command reflow %{ execute-keys %sh{
-    comment="$(echo $kak_selection | sed -n '1s/^\s*\([#/*()-]*\).*/\1/p')"
+    comment="$(echo $kak_selection | sed -n '1s/^\s*\([#/*()->]*\).*/\1/p')"
     if [ -z $comment ]; then
         printf '|fmt --width=%s --uniform-spacing<ret>\n' "${kak_opt_autowrap_column}"
     else

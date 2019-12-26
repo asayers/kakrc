@@ -6,7 +6,8 @@ map global normal '+'     ': reflow<ret>'        -docstring 'reflow selection'
 # Formatting comments
 declare-option -docstring 'Prefix indicating that a line is part of a docstring' str docstring_line
 define-command select-comment %{ execute-keys %sh{
-    # This doesn't quite work right - it will select all comment blocks in the current paragraph, not just the one the cursor is in.
+    # This doesn't quite work right - it will select all comment blocks in
+    # the current paragraph, not just the one the cursor is in.
     printf '<a-a>p<a-s><a-k>^\\h*%s<ret><a-_>\n' "$kak_opt_comment_line"
     # <a-a>c^($|\s*[^\s/]),^($|\s*[^\s/])<ret>H<a-;>L<a-;>
 }}
@@ -16,8 +17,8 @@ map global user 'f' '<a-a>/<a-=>'
 define-command reflow %{ execute-keys %sh{
     comment="$(echo $kak_selection | sed -n '1s/^\s*\([#/*()-]*\).*/\1/p')"
     if [ -z $comment ]; then
-        printf '|fmt -w%s -u<ret>\n' "${kak_opt_autowrap_column}"
+        printf '|fmt --width=%s --uniform-spacing<ret>\n' "${kak_opt_autowrap_column}"
     else
-        printf '|fmt -p%s -w%s -u<ret>\n' "${comment}" "${kak_opt_autowrap_column}"
+        printf '|fmt --prefix="%s" --width=%s --uniform-spacing<ret>\n' "${comment}" "${kak_opt_autowrap_column}"
     fi
 }}

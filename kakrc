@@ -8,8 +8,9 @@ add-highlighter global/ regex '[ \t]+$' 0:red,red
 # No clippy
 set -add global ui_options ncurses_assistant=none
 
-# Use ripgrep
-set global grepcmd 'rg --column --ignore'
+# Use ripgrep, and exclude json/csv files.  These tend to be very large and
+# uninteresting, but are non-binary, so rg searches them by default.
+set global grepcmd 'rg --column -Tjson -Tjsonl -Tcsv'
 
 set global toolsclient "tools"
 

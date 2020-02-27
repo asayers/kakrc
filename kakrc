@@ -91,8 +91,10 @@ map global user m ': mark-word<ret>' -docstring 'Mark the word under the cursor'
 map global user M ': mark-clear<ret>' -docstring 'Clear all marks'
 
 # Enable LSP
-# eval %sh{kak-lsp --kakoune -s $kak_session}
-# lsp-enable
+eval %sh{kak-lsp --kakoune -s $kak_session}
+hook global WinSetOption filetype=(rust|python|go|javascript|typescript|c|cpp) %{
+    lsp-enable-window
+}
 
 def find -params 1 -shell-script-candidates %{ git ls-files } %{ edit %arg{1} }
 

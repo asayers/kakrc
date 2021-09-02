@@ -49,10 +49,7 @@ map global goto '}' '<esc>: lint-next-error<ret>' -docstring 'next lint error'
 map global goto -docstring 'edit kakrc' R '<esc>: e ~/.config/kak/kakrc<ret>'
 
 # Show hover info (docs)
-# map global normal K ': lsp-hover<ret>'
-
-# Auto-highlight references
-# hook global NormalIdle '.*' %{ try %{ lsp-highlight-references }}
+map global normal K ': lsp-hover<ret>'
 
 # Case insensitive search by default
 map global normal / '/(?i)'

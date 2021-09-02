@@ -38,7 +38,8 @@ alias global vsp i3-split-horizontal
 alias global hsp i3-split-vertical
 
 # New goto targets
-map global goto ']' '<esc><a-a>w: ctags-search<ret>' -docstring 'jump to tag'
+map global goto ']' '<esc>: lsp-definition<ret>' -docstring 'jump to tag'
+# map global goto ']' '<esc><a-a>w: ctags-search<ret>' -docstring 'jump to tag'
 map global goto '<left>' '<esc>: buffer-previous<ret>' -docstring 'prev buffer'
 map global goto '<right>' '<esc>: buffer-next<ret>' -docstring 'next buffer'
 map global goto '<' '<esc>: grep-previous-match<ret>' -docstring 'prev grep match'

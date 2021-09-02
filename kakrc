@@ -85,9 +85,9 @@ hook global WinSetOption filetype=sh %{
     set window lintcmd 'shellcheck -f gcc'
 }
 
-map global user y -docstring 'yank to clipboard' '<a-|>xsel -ib<ret>'
-map global user p -docstring 'paste from clipboard' '<a-!>xsel --output --clipboard<ret>'
-map global user P -docstring 'paste from clipboard' '!xsel --output --clipboard<ret>'
+map global user y -docstring 'yank to clipboard' '<a-|>wl-copy<ret>'
+map global user p -docstring 'paste from clipboard' '<a-!>wl-paste<ret>'
+map global user P -docstring 'paste from clipboard' '!wl-paste<ret>'
 
 map global user m ': mark-word<ret>' -docstring 'Mark the word under the cursor'
 map global user M ': mark-clear<ret>' -docstring 'Clear all marks'

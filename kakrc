@@ -60,7 +60,8 @@ map global normal ? '?(?i)'
 
 # Key mappings to enter user modes
 # map global normal '<c-w>' ': enter-user-mode i3<ret>'
-map global user -docstring 'Git' "g" ': enter-user-mode git<ret>'
+map global user -docstring 'Git' g ': enter-user-mode git<ret>'
+map global user -docstring 'LSP' l ': enter-user-mode lsp<ret>'
 
 # Show git changes in gutter
 hook global WinCreate    .* 'git show-diff'

@@ -93,6 +93,16 @@ map global user M ': mark-clear<ret>' -docstring 'Clear all marks'
 eval %sh{$HOME/.local/bin/kak-lsp --kakoune -s $kak_session}
 lsp-enable
 
+declare-option -hidden str modeline_progress ""
+define-command -hidden -params 6 -override lsp-handle-progress %{
+    set global modeline_progress %sh{
+        if ! "$6"; then
+            echo "$2${5:+" ($5%)"}${4:+": $4"}"
+        fi
+    }
+}
+set global modelinefmt "%%opt{modeline_progress} %opt{modelinefmt}"
+
 def find -params 1 -shell-script-candidates %{ git ls-files } %{ edit %arg{1} }
 
 declare-user-mode select

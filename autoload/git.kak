@@ -38,22 +38,77 @@ define-command git-staged -docstring 'git-staged: Show the current file as it ap
     git-read-index %val{bufname}
 }
 
+map global normal '<a-=>' '|shrink-conflicts<ret>' -docstring "Shrink conflicts in the current buffer"
 
-
-##
-## git.kak by lenormf
-##
-
-# http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
-# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+## From git.kak by lenormf
 
 # Faces that highlight text that overflows the following limits:
 #   - title: 50 characters
 #   - body: 72 characters
+# http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 set-face global GitOverflowTitle yellow
 set-face global GitOverflowBody yellow
 
 hook -group git-commit-highlight global WinSetOption filetype=git-(commit|rebase) %{
     add-highlighter window/git-commit-highlight/ regex "^\h*[^#\s][^\n]{71}([^\n]+)" 1:GitOverflowBody
     add-highlighter window/git-commit-highlight/ regex "\A[\s\n]*[^#\s][^\n]{49}([^\n]+)" 1:GitOverflowTitle
+}
+
+
+## From git-konflict.kak by eko234
+# https://github.com/eko234/git-konflict.kak
+
+map global object m       %{c^[<lt>=|]{4\,}[^\n]*\n,^[<gt>=|]{4\,}[^\n]*\n<ret>} -docstring 'conflict markers'
+map global object <a-m>   %{c^[<lt>]{4\,},^[<gt>]{4\,}[^\n]*<ret>}               -docstring 'conflict'
+# map global object <a-m> %{c^[<lt>]{4\,},^[<gt>]{4\,}[^\n]*<ret>}           -docstring 'conflict section'
+
+define-command konflict-use-mine %{
+  evaluate-commands -draft %{
+    execute-keys ghh/^<lt>{4}<ret>xd
+    execute-keys h/^={4}<ret>j
+    execute-keys -with-maps <a-a>m
+    execute-keys d
+  }
+} -docstring "resolve a conflict by using the first version"
+
+define-command konflict-use-yours %{
+  evaluate-commands -draft %{
+    execute-keys ghj
+    execute-keys -with-maps <a-a>m
+    execute-keys dh/^>{4}<ret>xd
+  }
+} -docstring "resolve a conflict by using the second version"
+
+define-command konflict-use-mine-then-yours %{
+  evaluate-commands -draft %{
+    execute-keys -with-maps <a-l><a-a><a-m>s[=]{4,}<ret>c<esc>[m<a-h><a-l>dd]m<a-h><a-l>dd
+  }
+} -docstring "resolve a conflict by using the first and then the second version"
+
+define-command konflict-use-yours-then-mine %{
+  evaluate-commands -draft -save-regs ^ %{
+    execute-keys -with-maps <a-l><a-a><a-m>s[=]{4,}<ret>ghh[mJZ<a-l><a-a><a-m>s[=]{4,}<ret>ghj]mKL<a-z>a<a-(>
+    execute-keys -with-maps <a-l><a-a><a-m>s[=]{4,}<ret>c<esc>[m<a-h><a-l>dd]m<a-h><a-l>dd
+  }
+} -docstring "resolve a conflict by using the second and then the first version"
+
+define-command konflict-use-none %{
+  evaluate-commands -draft %{
+    execute-keys <a-l>
+    execute-keys -with-maps <a-a><a-m>
+    execute-keys <a-d>
+  }
+} -docstring "resolve a conflict by using none"
+
+define-command konflicts-grep %{
+  grep <<<<
+}
+
+define-command konflict-highlight-conflicts -override %{
+  add-highlighter -override global/ regex %{^[<lt>=]{4,}[^\n]*\n.+^[<gt>=]{4,}[^\n]*\n} 0:default+rb
+}
+
+define-command konflict-start %{
+  konflict-highlight-conflicts
+  konflicts-grep
 }

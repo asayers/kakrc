@@ -1,4 +1,4 @@
-colorscheme gruvbox
+colorscheme gruvbox-dark
 add-highlighter global/ show-matching
 add-highlighter global/ number-lines -hlcursor
 
@@ -21,7 +21,7 @@ hook global BufCreate '\*make\*' %{
 }
 
 # Browse directory on backspace
-map global goto 'G' '<esc>: edit-or-dir %sh{git rev-parse --show-cdup}<ret>'
+map global goto 'd' '<esc>: edit-or-dir %sh{git rev-parse --show-cdup}<ret>'
 
 # Soft tabs
 hook global InsertChar \t %{ try %{
@@ -46,7 +46,7 @@ map global goto '<' '<esc>: grep-previous-match<ret>' -docstring 'prev grep matc
 map global goto '>' '<esc>: grep-next-match<ret>' -docstring 'next grep match'
 map global goto '{' '<esc>: lint-previous-error<ret>' -docstring 'prev lint error'
 map global goto '}' '<esc>: lint-next-error<ret>' -docstring 'next lint error'
-map global goto -docstring 'edit kakrc' R '<esc>: e ~/.config/kak/kakrc<ret>'
+map global goto -docstring 'edit kakrc' r '<esc>: e ~/.config/kak/kakrc<ret>'
 
 # Show hover info (docs)
 map global normal K ': lsp-hover<ret>'
@@ -90,7 +90,7 @@ map global user m ': mark-word<ret>' -docstring 'Mark the word under the cursor'
 map global user M ': mark-clear<ret>' -docstring 'Clear all marks'
 
 # Enable LSP
-eval %sh{$HOME/.local/bin/kak-lsp --kakoune -s $kak_session}
+eval %sh{kak-lsp --kakoune -s $kak_session}
 lsp-enable
 
 declare-option -hidden str modeline_progress ""
@@ -110,3 +110,12 @@ map global normal "'" ': enter-user-mode select<ret>'
 map global select "'" ':find '         -docstring 'select file'
 map global select ';' ':buffer '       -docstring 'select buffer'
 map global select 'l' ':ctags-search ' -docstring 'select tag'
+
+declare-user-mode konflict
+map global user k ': enter-user-mode konflict<ret>'
+map global konflict s ': konflict-start<ret>'
+map global konflict j ': konflict-use-mine<ret>'
+map global konflict k ': konflict-use-yours<ret>'
+map global konflict J ': konflict-use-mine-then-yours<ret>'
+map global konflict K ': konflict-use-yours-then-mine<ret>'
+map global konflict d ': konflict-use-none<ret>'
